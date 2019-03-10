@@ -10,19 +10,23 @@ class Knapsack(inFile: String) {
     init {
 
         File(inFile).readLines()
-            .forEachIndexed {
-                index, line ->
-
+            .forEachIndexed { index, line ->
                 when(index) {
                     0 -> capacity = line.toInt()
                     1 -> numItems = line.toInt()
+                    // item lines
                     else -> {
+                        // if items has not been initialized
                         if (items == null) {
+                            // we now have the number of items
+                            // so we initialize it
                             items = List(numItems) { Item() }
                         }
 
+                        // split eat item into it's parts
                         val parts = line.split(' ')
 
+                        // we only need parts 1 and 2, the name is irrelevant
                         items!![index - 2].weight = parts[1].toInt()
                         items!![index - 2].value = parts[2].toInt()
                     }
